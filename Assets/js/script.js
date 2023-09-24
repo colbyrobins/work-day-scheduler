@@ -6,18 +6,21 @@ $(function () {
 
   var container = $(".container-lg");
 
+  // iterate the hours of a work day and create a time block for each hour.
   for (var i = 9; i < 18; i++) {
     
     var timeText = i;
     var timeStyle = "";
     var currentHour = dayjs().hour();
 
+    // check the hour to determine if its AM or PM
     if (i <= 12) {
       timeText = i + " AM";
     }else {
       timeText = i - 12 + " PM";
     }
-
+    
+    // check current hour to see if the time box is in the past present or future.
     if (currentHour === i) {
       timeStyle = "present";
     }
@@ -28,6 +31,7 @@ $(function () {
       timeStyle = "future";
     }
     
+    // create the time boxes.
     var newDiv = $("<div id='hour-" + i + "' class='row time-block " + timeStyle + "'></div>");
     var nestedDiv = $("<div class='col-2 col-md-1 hour text-center py-3'>" + timeText + "</div>");
     var nestedTextarea = $("<textarea class='col-8 col-md-10 description' rows=3> </textarea>");
@@ -41,11 +45,13 @@ $(function () {
     container.append(newDiv);
   }
 
+  // the save button to capture input.
   $(".btn").click(function(){
     var data = $(this).prev("textarea").val();
     localStorage.setItem(this.parentElement.id, data )
   })
 
+  // iterate each time box and check if data was saved. If it was display it.
   $(".container-lg").children().each(function () {
     
     var id = $(this).attr("id");
