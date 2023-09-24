@@ -1,5 +1,9 @@
 $(function () {
 
+  // set the date and time in the web page header.
+  var currentDay = $("#currentDay");
+  currentDay.text(dayjs().format("dddd, MMMM D YYYY"));
+
   var container = $(".container-lg");
 
   for (var i = 9; i < 18; i++) {
